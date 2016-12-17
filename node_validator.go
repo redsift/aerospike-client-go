@@ -63,6 +63,7 @@ func (ndv *nodeValidator) seedNodes(cluster *Cluster, host *Host, nodesToAdd map
 }
 
 func (ndv *nodeValidator) validateNode(cluster *Cluster, host *Host) error {
+	Logger.Debug("validateNode: %s:%d", host.Name, host.Port)
 	if err := ndv.setAliases(host); err != nil {
 		return err
 	}
