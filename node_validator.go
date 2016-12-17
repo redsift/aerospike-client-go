@@ -82,6 +82,7 @@ func (ndv *nodeValidator) validateNode(cluster *Cluster, host *Host) error {
 }
 
 func (ndv *nodeValidator) setAliases(host *Host) error {
+	Logger.Debug("setAliases: %s", host.Name)
 	// IP addresses do not need a lookup
 	ip := net.ParseIP(host.Name)
 	if ip != nil {
@@ -89,6 +90,7 @@ func (ndv *nodeValidator) setAliases(host *Host) error {
 		aliases[0] = NewHost(host.Name, host.Port)
 		ndv.aliases = aliases
 	} else {
+		Logger.Debug("Looking up address: %s", host.Name)
 		addresses, err := net.LookupHost(host.Name)
 		if err != nil {
 			Logger.Error("HostLookup failed with error: ", err)
